@@ -1,0 +1,13 @@
+header
+    padding: 0 !important
+    max-width: unset !important
+    .navbar
+        .nav-item
+            .sub-menu
+                @apply invisible opacity-0 transition-all
+            &:hover
+                .sub-menu
+                    @apply visible opacity-100 top-full
+    .menu-mobile
+        &.active
+            @apply left-0 transition-all

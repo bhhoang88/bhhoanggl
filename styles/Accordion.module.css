@@ -1,0 +1,45 @@
+/* styles/Accordion.module.css */
+.accordionItem {
+    border-radius: 8px;
+}
+
+.accordionHeader {
+    display: block;
+    cursor: pointer;
+}
+
+.accordionHeader p {
+    margin: 0;
+}
+
+.accordionHeaderWithSubItems svg {
+    transition: transform 0.3s ease;
+}
+
+.accordionHeaderWithSubItems.accordionHeaderOpen svg {
+    transform: rotate(90deg);
+}
+
+.accordionHeaderWithSubItems.accordionHeaderClosed svg {
+    transform: rotate(0deg);
+}
+
+.accordionContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.accordionContentOpen {
+    max-height: 500px;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.listItem {
+    padding: 0;
+}

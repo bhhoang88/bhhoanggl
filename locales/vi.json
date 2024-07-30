@@ -1,0 +1,8 @@
+{
+    "common": {
+        "language": "Language",
+        "selectLanguage": "Select Language",
+        "english": "English",
+        "vietnamese": "Vietnamese"
+    }
+}
