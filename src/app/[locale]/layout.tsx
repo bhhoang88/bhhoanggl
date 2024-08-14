@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
+import { Provider } from 'react-redux';
 import { getMessages } from 'next-intl/server';
 import { Be_Vietnam_Pro } from "next/font/google";
 import { siteConfig } from "@/config/config";
 import '@/styles/global.sass'
 import Header from '@/components/header/Header';
 import Footer from '@/components/footer/Footer';
+import { store } from '@/store/store';
 
 const fontFamily = Be_Vietnam_Pro({
     subsets: ["latin"],
@@ -37,11 +39,13 @@ export default async function LocaleLayout({
         <html lang={locale}>
             <body className={fontFamily.className} suppressHydrationWarning={true}>
                 <NextIntlClientProvider messages={messages}>
-                    <Header />
-                    <main>
-                        {children}
-                    </main>
-                    <Footer />
+                    <Provider store={store}>
+                        <Header />
+                        <main>
+                            {children}
+                        </main>
+                        <Footer />
+                    </Provider>
                 </NextIntlClientProvider>
             </body>
         </html>
