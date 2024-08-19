@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { Navbar, NavbarMenuToggle, NavbarMenuItem, NavbarContent, NavbarItem, Link } from "@nextui-org/react";
 import ImageOptimize from "../common/ImageOptimize";
@@ -7,10 +8,10 @@ import { siteConfig } from "@/config/config";
 import { DiscordIcon, GithubIcon, TwitterIcon } from "../icons";
 import { IconBrandX } from "@tabler/icons-react";
 
-export default function Header() {
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+const Header: React.FC = () => {
+    const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
 
-    const menuItems = [
+    const menuItems: string[] = [
         "Giới thiệu",
         "Dịch vụ",
         "Dự án",
@@ -58,4 +59,6 @@ export default function Header() {
             </div>
         </Navbar>
     );
-}
+};
+
+export default Header;

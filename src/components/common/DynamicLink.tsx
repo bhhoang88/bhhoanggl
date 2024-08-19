@@ -1,50 +1,47 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+
+import React, { useEffect, useState, ReactNode } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { serialize, handleUrl } from '@/config/urlHelper';
 import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 interface DynamicLinkProps {
     href: string;
     as: string;
-    children: React.ReactNode;
+    children: ReactNode;
     scroll?: boolean;
 }
 
-interface RemapLinkState {
-    href: string | null;
-    as: string | null;
-}
-
-const DynamicLink: React.FC<DynamicLinkProps> = React.memo((props) => {
+const DynamicLink: React.FC<DynamicLinkProps> = React.memo(function DynamicLink(props) {
     const { href, as, children, scroll = true } = props;
 
-    if (typeof window === 'undefined') {
-        return null;
-    }
+    const { language } = useSelector((state: RootState) => state.app);
 
-    const { language } = useSelector((state) => state.app);
-    const [remapLink, setRemapLink] = useState<RemapLinkState>({ href: null, as: null });
+    const [remapLink, setRemapLink] = useState({
+        href: '',
+        as: '',
+    });
 
     useEffect(() => {
         if (href && as) {
-            const newHref = href.replace('//', '/');
-            const newAs = as.replace('//', '/');
-            setRemapLink({ href: newHref, as: newAs });
+            setRemapLink({
+                href: href.replace('//', '/'),
+                as: as.replace('//', '/'),
+            });
         }
     }, [href, as]);
 
     return href?.charAt(0) === '/' ? (
         <Link
-            href={serialize(remapLink.href || '', { lang: language || 'vi', scroll })}
-            as={handleUrl(remapLink.as || '', language || 'vi')}
+            href={`${serialize(remapLink.href || '', { lang: language, scroll: scroll })}`}
+            as={handleUrl(remapLink.as || '', language)}
             scroll={scroll}
         >
             {children}
         </Link>
     ) : (
-        <Link href={serialize(href, {})} as={handleUrl(as)} scroll={scroll}>
+        <Link href={`${serialize(href)}`} as={handleUrl(as)} scroll={scroll}>
             {children}
         </Link>
     );

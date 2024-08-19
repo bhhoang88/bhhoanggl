@@ -2,7 +2,7 @@ import _get from 'lodash/get';
 
 export const handleUrl = (url: string, lang: string | null = null): string => {
     if (url) {
-        if (url === 'https://env.hdbank.com.vn/searchs.html') {
+        if (url === '') {
             return url;
         }
 
