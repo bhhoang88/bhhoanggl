@@ -1,14 +1,27 @@
-import { notFound } from 'next/navigation';
-import { getRequestConfig } from 'next-intl/server';
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import enTranslation from './locale/en.json';
+import frTranslation from './locale/fr.json';
 
-// Can be imported from a shared config
-const locales = ['vi', 'en'];
+const resources = {
+    en: {
+        translation: enTranslation,
+    },
+    fr: {
+        translation: frTranslation,
+    },
+};
 
-export default getRequestConfig(async ({ locale }) => {
-    // Validate that the incoming `locale` parameter is valid
-    if (!locales.includes(locale as any)) return notFound();
+i18n
+    .use(initReactI18next)
+    .init({
+        resources,
+        lng: 'en',
+        fallbackLng: 'en',
 
-    return {
-        messages: (await import(`../messages/${locale}.json`)).default
-    };
-});
+        interpolation: {
+            escapeValue: false,
+        },
+    });
+
+export default i18n;
