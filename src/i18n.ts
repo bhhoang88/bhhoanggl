@@ -1,14 +1,14 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import enTranslation from './locale/en.json';
-import frTranslation from './locale/fr.json';
+import viTranslation from './locale/vi.json';
 
 const resources = {
+    vi: {
+        translation: viTranslation,
+    },
     en: {
         translation: enTranslation,
-    },
-    fr: {
-        translation: frTranslation,
     },
 };
 
@@ -16,8 +16,8 @@ i18n
     .use(initReactI18next)
     .init({
         resources,
-        lng: 'en',
-        fallbackLng: 'en',
+        lng: localStorage.getItem('language') || 'vi',
+        fallbackLng: 'vi',
 
         interpolation: {
             escapeValue: false,

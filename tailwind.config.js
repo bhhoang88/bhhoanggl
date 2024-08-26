@@ -31,7 +31,7 @@ module.exports = {
                 5: "5"
             },
             fontFamily: {
-                body: ["Be Vietnam Pro", "sans-serif"]
+                body: ["JetBrains_Mono", "monospace"]
             },
 
             colors: {
